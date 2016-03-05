@@ -17,6 +17,34 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
+# =============== #
+# Unity generated #
+# =============== #
+*.sln
+*.userprefs
+*.csproj
+*.pidb
+*.unityproj
+.DS_Store
+/Library
+/obj
+/Temp
+
+
+# ===================================== #
+# Visual Studio / MonoDevelop generated #
+# ===================================== #
+ExportedObj/
+obj/
+*.svd
+*pdb
+*.userprefs
+*.pidb
+*.suo
+*.user
+*.unityproj
+*.booproj
+
 # =========================
 # Operating System Files
 # =========================
