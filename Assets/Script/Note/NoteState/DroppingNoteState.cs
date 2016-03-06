@@ -3,8 +3,8 @@ using System.Collections;
 
 public class DroppingNoteState : NoteState
 {
-	public static float Velocity = 2f;
-	public static float TimeBeforeActivate = 0.5f;
+	public static float Velocity = 2.5f;
+	public static float TimeBeforeActivate = 0.3f;
 	
 	public override NoteState HandleInput(Note note, NoteInput input)
 	{

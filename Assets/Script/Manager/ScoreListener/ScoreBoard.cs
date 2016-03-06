@@ -16,9 +16,13 @@ public class ScoreBoard : MonoBehaviour
 		ScoreText.text = newScore.ToString(CultureInfo.CurrentCulture);
 	}
 
+	public ScoreBoard()
+	{
+		UpdateScoreListener = new UpdateScoreListener(this);
+	}
+
 	// Use this for initialization
 	void Start () {
-		UpdateScoreListener = new UpdateScoreListener(this);
 		ScoreText = GetComponent<Text>();
 		UpdateScore(0f);
 	}

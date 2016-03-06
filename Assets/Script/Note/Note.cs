@@ -16,6 +16,9 @@ public class Note : MonoBehaviour
 	// when get related invoked
 	private void Invoked()
 	{
+		if (!GameManager.Playing())
+			return;
+
 		var newState = _state.HandleInput(this, new NoteInput(true, _timer.Time));
 
 		// enter new NoteState
@@ -46,6 +49,8 @@ public class Note : MonoBehaviour
 	// Update is called once per frame
 	private void Update()
 	{
+		if (!GameManager.Playing())
+			return;
 
 		var newState = _state.StateUpdate(this);
 

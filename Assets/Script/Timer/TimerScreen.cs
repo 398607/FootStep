@@ -5,13 +5,9 @@ using UnityEngine.UI;
 
 public class TimerScreen : MonoBehaviour
 {
-	private Timer _timer;
-
 	// Use this for initialization
 	void Start ()
 	{
-		// bulid timer
-		_timer = GameManager.Instance.Timer;
 		StartCoroutine("UpdateTime");
 	}
 
@@ -19,7 +15,7 @@ public class TimerScreen : MonoBehaviour
 	{
 		while (true)
 		{
-			gameObject.GetComponentInParent<Text>().text = _timer.Time.ToString(CultureInfo.CurrentCulture);
+			gameObject.GetComponentInParent<Text>().text = GameManager.GetTime().ToString(CultureInfo.CurrentCulture);
 			yield return null;
 		}
 	}

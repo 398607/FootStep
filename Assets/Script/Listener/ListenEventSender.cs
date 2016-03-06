@@ -16,7 +16,8 @@ public abstract class ListenEventSender
 
 	public void AddListener(Listener listener)
 	{
-		_listenerList.Add(listener);
+		if (listener != null)
+			_listenerList.Add(listener);
 	}
 
 }

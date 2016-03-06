@@ -9,7 +9,7 @@ public class NoteCreator : MonoBehaviour
 	private NoteTimeLine _timeLine = new NoteTimeLine();
 	private int _nextNote = 0;
 
-	public static float TimeBeforeCreate = 5f;
+	public static float TimeBeforeCreate = 10.0f / DroppingNoteState.Velocity;
 
 	private Note NewNote(int number, float exactTime)
 	{

@@ -4,7 +4,7 @@ using System.Collections;
 public class ScoreListener : Listener
 {
 	public float TotalScore = 0f;
-	private UpdateScoreSender _updateScoreSender = new UpdateScoreSender();
+	private readonly UpdateScoreSender _updateScoreSender = new UpdateScoreSender();
 
 	public void AddScoreBoard(ScoreBoard scoreBoard)
 	{
