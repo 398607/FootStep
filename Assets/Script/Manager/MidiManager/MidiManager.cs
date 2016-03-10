@@ -8,105 +8,6 @@ using System.Runtime.InteropServices;
 using System.Security.Cryptography.X509Certificates;
 using Mono.Cecil.Cil;
 
-public class MidiFile
-{
-	public enum MidiFormat
-	{
-		Single,
-		MutipleSync,
-		MutipleNotSync
-	}
-	public MidiFormat Format;
-
-	public long ChunkCount;
-
-	public long PPQN;
-
-	public long UsPerPai;
-
-	public List<MidiChunk> ChunkList = new List<MidiChunk>(); 
-
-	public void LogInfo()
-	{
-		Debug.Log("Midi file Info: " + Format.ToString() + " " + ChunkCount + " " + PPQN);
-	}
-}
-
-public class MidiChunk
-{
-	public int Number;
-	public long Count;
-
-	public List<MidiEvent> EventList = new List<MidiEvent>();
-
-	public void LogInfo()
-	{
-		Debug.Log("Midi Chunk Info: " + Number + " " + Count);
-	}
-}
-
-public class MidiEvent
-{
-	public long DeltaTime;
-
-	public virtual string Info()
-	{
-		return "DeltaTime: " + DeltaTime;
-	}
-}
-
-public class WithTunnelMidiEvent : MidiEvent
-{
-	public long TunnelNumber;
-
-	public override string Info()
-	{
-		return base.Info() + " TunnelNumber: " + TunnelNumber;
-	}
-}
-
-public class NoteOnMidiEvent : WithTunnelMidiEvent
-{
-	public long Note;
-	public long Speed;
-
-	public override string Info()
-	{
-		return base.Info() + " OnNote: " + Note + " Speed: " + Speed;
-	}
-}
-
-public class NoteOffMidiEvent : WithTunnelMidiEvent
-{
-	public long Note;
-	public long Speed;
-
-	public override string Info()
-	{
-		return base.Info() + " OffNote: " + Note + " Speed: " + Speed;
-	}
-}
-
-public class ChangeTimbreMidiEvent : WithTunnelMidiEvent
-{
-	public long Program;
-
-	public override string Info()
-	{
-		return base.Info() + " Program: " + Program;
-	}
-}
-
-public class ChangeVolumeMidiEvent : WithTunnelMidiEvent
-{
-	public long Type; // 0x07 or 0x39
-	public long Size;
-
-	public override string Info()
-	{
-		return base.Info() + " Type: " + Type + " Size: " + Size;
-	}
-}
 
 public class MidiManager
 {
@@ -226,7 +127,6 @@ public class MidiManager
 
 		while (!GetEvent(chunk))
 		{
-			
 		}
 
 		return chunk;
@@ -283,8 +183,8 @@ public class MidiManager
 				return true;
 			case 0x51:
 				CurrentPointer ++;
-				CurrentFile.UsPerPai = GetValue(3);
-				Debug.Log("UsPerPai: " + CurrentFile.UsPerPai);
+				CurrentFile.UsPerQuaterNote = GetValue(3);
+				Debug.Log("UsPerPai: " + CurrentFile.UsPerQuaterNote);
 				break;
 			default:
 				Debug.Log("Control");

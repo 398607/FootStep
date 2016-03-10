@@ -6,12 +6,15 @@ public class GameManager : MonoBehaviour
 {
 	// inspector
 	public Timer TimerPrefab;
+	public NoteCreator NoteCreatorPrefab;
 
 	[HideInInspector]
 	public Timer Timer;
 	public static GameManager Instance = null;
 
 	private readonly ScoreListener _scoreListener = null;
+	private NoteCreator _noteCreator = null;
+	private MusicPlayer _musicPlayer = null;
 
 	// GUI
 	private Button startButton = null;
@@ -47,7 +50,14 @@ public class GameManager : MonoBehaviour
 		Timer = Instantiate(TimerPrefab);
 		Timer.StartTimer();
 
+		// note creator
+		_noteCreator = Instantiate(NoteCreatorPrefab);
+
+		// score listener
 		_scoreListener.AddScoreBoard(GameObject.FindObjectOfType<ScoreBoard>());
+
+		// music player
+		_musicPlayer = GameObject.FindObjectOfType<MusicPlayer>();
 
 		// play/ pause button
 		startButton = GameObject.Find("StartButton").GetComponent<Button>();
@@ -56,13 +66,18 @@ public class GameManager : MonoBehaviour
 
 		// midi parser
 		var midiManager = new MidiManager();
-		midiManager.Parse();
+		var midiFile = midiManager.Parse();
+
+		// load test midi file
+		_noteCreator.LoadMidiFile(midiFile, 6f);
+
 	}
 
 	// start game (invoked by startButton)
 	void PlayOrPause()
 	{
 		Timer.Trigger();
+		_musicPlayer.PlayPause();
 		if (Timer.Functioning)
 		{
 			startButton.GetComponentInChildren<Text>().text = "pause";
@@ -75,6 +90,10 @@ public class GameManager : MonoBehaviour
 
 	void Update()
 	{
-		
+		if (GetTime() > 6f && !_musicPlayer.Functioning)
+		{
+			_musicPlayer.Functioning = true;
+			_musicPlayer.PlayPause();
+		}
 	}
 }

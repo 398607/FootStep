@@ -16,11 +16,6 @@ public class DroppingNoteState : NoteState
 		note.gameObject.transform.Translate(new Vector3(0, -Velocity * Time.deltaTime, 0));
 
 		// enter activate state if 
-		if (note.ExactTime - GameManager.GetTime() <= TimeBeforeActivate)
-		{
-			return new ActivateNoteState();
-		}
-
-		return null;
+		return note.ExactTime - GameManager.GetTime() <= TimeBeforeActivate ? new ActivateNoteState() : null;
 	}
 }
