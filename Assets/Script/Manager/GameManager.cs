@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
 	public Timer Timer;
 	public static GameManager Instance = null;
 
-	private ScoreListener scoreListener = null;
+	private readonly ScoreListener _scoreListener = null;
 
 	// GUI
 	private Button startButton = null;
@@ -30,7 +30,7 @@ public class GameManager : MonoBehaviour
 
 	public static ScoreListener ScoreListener()
 	{
-		return Instance.scoreListener;
+		return Instance._scoreListener;
 	}
 
 	public GameManager()
@@ -38,7 +38,7 @@ public class GameManager : MonoBehaviour
 		if (Instance == null)
 			Instance = this;
 
-		scoreListener = new ScoreListener();
+		_scoreListener = new ScoreListener();
 	}
 
 	// Use this for initialization
@@ -47,11 +47,16 @@ public class GameManager : MonoBehaviour
 		Timer = Instantiate(TimerPrefab);
 		Timer.StartTimer();
 
-		scoreListener.AddScoreBoard(GameObject.FindObjectOfType<ScoreBoard>());
+		_scoreListener.AddScoreBoard(GameObject.FindObjectOfType<ScoreBoard>());
 
+		// play/ pause button
 		startButton = GameObject.Find("StartButton").GetComponent<Button>();
 		startButton.GetComponentInChildren<Text>().text = "play";
 		startButton.onClick.AddListener(PlayOrPause);
+
+		// midi parser
+		var midiManager = new MidiManager();
+		midiManager.Parse();
 	}
 
 	// start game (invoked by startButton)
