@@ -30,21 +30,24 @@ public class NoteTimeLine
 		TimeLine.Clear();
 
 		// TODO: get this ugly unit test done
-		var chunk = midiFile.ChunkList[1];
-
-		var currentTime = 0.0f;
-		foreach (var midiEvent in chunk.EventList)
+		
+		foreach (var chunk in midiFile.ChunkList)
 		{
-			var deltaTimeMSecond = midiEvent.DeltaTime*midiFile.UsPerQuaterNote/1000f/midiFile.PPQN;
-			currentTime += deltaTimeMSecond / 1000f;
 
-			var noteOnEvent = midiEvent as NoteOnMidiEvent;
-			if (noteOnEvent == null)
-				continue;
+			var currentTime = 0.0f;
+			foreach (var midiEvent in chunk.EventList)
+			{
+				var deltaTimeMSecond = midiEvent.DeltaTime*midiFile.UsPerQuaterNote/1000f/midiFile.PPQN;
+				currentTime += deltaTimeMSecond/1000f;
 
-			Debug.Log("Note On: " + currentTime);
+				var noteOnEvent = midiEvent as NoteOnMidiEvent;
+				if (noteOnEvent == null)
+					continue;
 
-			AddNote(new NoteTimeLineUnit(currentTime + delay, noteOnEvent.Note));
+				Debug.Log("Note On: " + currentTime);
+
+				AddNote(new NoteTimeLineUnit(currentTime + delay, noteOnEvent.Note));
+			}
 		}
 	}
 }

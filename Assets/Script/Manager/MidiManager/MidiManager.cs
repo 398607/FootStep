@@ -173,17 +173,20 @@ public class MidiManager
 		case 0xF0:
 			if (firstByte != 0xFF)
 				break;
-			switch (GetValue(1)) // End of Chunk
+			switch (GetValue(1))
 			{
+			// End of Chunk
 			case 0x2F:
 				Debug.Log("End");
 				CurrentPointer ++;
 				return true;
+			// Us Per quater note
 			case 0x51:
 				CurrentPointer ++;
 				CurrentFile.UsPerQuaterNote = GetValue(3);
 				Debug.Log("UsPerPai: " + CurrentFile.UsPerQuaterNote);
 				break;
+			// default (other control event)
 			default:
 				Debug.Log("Control");
 				var length = GetValue(1);

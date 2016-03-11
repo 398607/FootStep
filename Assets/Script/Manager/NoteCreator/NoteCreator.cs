@@ -13,8 +13,8 @@ public class NoteCreator : MonoBehaviour
 
 	private Note NewNote(int number, NoteTimeLineUnit unit)
 	{
-		// TODO: this convert function (y = 5/6*x - 65) should be seriously considered.
-		var note = Instantiate(NotePrefab, new Vector3(unit.Value*5f/6f-65f, 5, 0), Quaternion.identity) as Note;
+		// TODO: this convert function should be seriously considered.
+		var note = Instantiate(NotePrefab, new Vector3(((5 + unit.Value)%11)-5, 5, 0), Quaternion.identity) as Note;
 		note.ExactTime = unit.ExactTime;
 		note.Number = number;
 		return note;
