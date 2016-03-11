@@ -17,6 +17,12 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
+
+##################
+# Demo data
+##################
+DemoV*_Data/
+
 # =============== #
 # Unity generated #
 # =============== #
@@ -73,3 +79,6 @@ obj/
 Network Trash Folder
 Temporary Items
 .apdisk
+*.exe
+*.dll
+*.mdb

@@ -42,7 +42,7 @@ public class NoteTimeLine
 			if (noteOnEvent == null)
 				continue;
 
-			// Debug.Log("Note On: " + currentTime);
+			Debug.Log("Note On: " + currentTime);
 
 			AddNote(new NoteTimeLineUnit(currentTime + delay, noteOnEvent.Note));
 		}

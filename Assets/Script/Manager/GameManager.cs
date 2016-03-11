@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
 	public Timer TimerPrefab;
 	public NoteCreator NoteCreatorPrefab;
 
-	[HideInInspector]
+	// [HideInInspector]
 	public Timer Timer;
 	public static GameManager Instance = null;
 
@@ -21,8 +21,11 @@ public class GameManager : MonoBehaviour
 
 	public static float GetTime()
 	{
+		// lazy find?
 		if (Instance.Timer == null)
+		{
 			return 0f;
+		}
 		return Instance.Timer.Time;
 	}
 
@@ -38,8 +41,7 @@ public class GameManager : MonoBehaviour
 
 	public GameManager()
 	{
-		if (Instance == null)
-			Instance = this;
+		Instance = this;
 
 		_scoreListener = new ScoreListener();
 	}
@@ -70,6 +72,8 @@ public class GameManager : MonoBehaviour
 
 		// load test midi file
 		_noteCreator.LoadMidiFile(midiFile, 6f);
+
+		Debug.Log("GameManger Start() done");
 
 	}
 

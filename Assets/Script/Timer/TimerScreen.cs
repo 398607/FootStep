@@ -15,7 +15,7 @@ public class TimerScreen : MonoBehaviour
 	{
 		while (true)
 		{
-			gameObject.GetComponentInParent<Text>().text = GameManager.GetTime().ToString(CultureInfo.CurrentCulture);
+			gameObject.GetComponentInParent<Text>().text = GameManager.GetTime().ToString();
 			yield return null;
 		}
 	}

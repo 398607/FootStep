@@ -6,8 +6,6 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Security.Cryptography.X509Certificates;
-using Mono.Cecil.Cil;
-
 
 public class MidiManager
 {
