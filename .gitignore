@@ -22,6 +22,7 @@ $RECYCLE.BIN/
 # Demo data
 ##################
 DemoV*_Data/
+*_Test/
 
 # =============== #
 # Unity generated #

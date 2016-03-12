@@ -13,6 +13,8 @@ public class Note : MonoBehaviour
 
 	private NoteState _state;
 
+	public Animator Animator;
+
 	// when get related invoked
 	private void Invoked()
 	{
@@ -40,6 +42,8 @@ public class Note : MonoBehaviour
 	private void Start()
 	{
 		_timer = GameManager.Instance.Timer;
+
+		Animator = GetComponent<Animator>();
 
 		_state = new DroppingNoteState();
 		_state.Enter(this);

@@ -5,6 +5,7 @@ public class ActivateNoteState : NoteState
 {
 	private SpriteRenderer _noteRenderer = null;
 	private static readonly float TimeBeforeActivate = DroppingNoteState.TimeBeforeActivate;
+	public static float Velocity = DroppingNoteState.Velocity;
 
 	public override void Enter(Note note)
 	{
@@ -18,18 +19,21 @@ public class ActivateNoteState : NoteState
 
 	public override NoteState StateUpdate(Note note)
 	{
-		// TODO: go to Miss if not clicked for too long
+		// feature: keep droping when ready to be invoked
+		note.gameObject.transform.Translate(new Vector3(0, -Velocity * Time.deltaTime, 0));
+		
 		var percent = (note.ExactTime - GameManager.GetTime()) / TimeBeforeActivate;
 
 		if (percent >= 0f)
 		{
+			// useless
 			_noteRenderer.color = new Color(percent, percent, percent);
 		}
 		else if (percent > -1f)
 		{
 			_noteRenderer.color = new Color(0f, 0f, 0f, percent + 1);
 		}
-		else // if (percent <= -1f)
+		if (percent <= -1f)
 		{
 			return new MissNoteState();
 		}

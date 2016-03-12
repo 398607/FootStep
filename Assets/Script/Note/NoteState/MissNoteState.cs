@@ -10,6 +10,7 @@ public class MissNoteState : NoteState
 
 	public override NoteState StateUpdate(Note note)
 	{
+		note.Animator.SetInteger("Disappear", 1);
 		return new DisappearNoteState(GameManager.GetTime());
 	}
 }

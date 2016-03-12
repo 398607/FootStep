@@ -177,7 +177,7 @@ public class MidiManager
 			{
 			// End of Chunk
 			case 0x2F:
-				Debug.Log("End");
+				// Debug.Log("End");
 				CurrentPointer ++;
 				return true;
 			// Us Per quater note
@@ -188,7 +188,7 @@ public class MidiManager
 				break;
 			// default (other control event)
 			default:
-				Debug.Log("Control");
+				// Debug.Log("Control");
 				var length = GetValue(1);
 				CurrentPointer += length;
 				break;
@@ -198,7 +198,7 @@ public class MidiManager
 		if (newEvent != null)
 		{
 			newEvent.DeltaTime = deltaTime;
-			Debug.Log(newEvent.Info());
+			// Debug.Log(newEvent.Info());
 			currentChunk.EventList.Add(newEvent);
 		}
 		return false;
