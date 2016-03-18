@@ -23,15 +23,13 @@ $RECYCLE.BIN/
 ##################
 DemoV*_Data/
 *_Test/
+*.mp3
 
 # =============== #
 # Unity generated #
 # =============== #
-*.sln
 *.userprefs
-*.csproj
 *.pidb
-*.unityproj
 .DS_Store
 /Library
 /obj
@@ -44,12 +42,10 @@ DemoV*_Data/
 ExportedObj/
 obj/
 *.svd
-*pdb
 *.userprefs
 *.pidb
 *.suo
 *.user
-*.unityproj
 *.booproj
 
 # =========================
@@ -83,5 +79,3 @@ Temporary Items
 *.exe
 *.dll
 *.mdb
-test2.mid
-test2.mp3
