@@ -15,9 +15,16 @@ public class NoteTimeLineUnit
 	}
 }
 
-public class NoteTimeLine
+public class NoteTimeLine : TimeLine<NoteTimeLineUnit>
 {
-	public List<NoteTimeLineUnit> TimeLine = new List<NoteTimeLineUnit>();
+
+	public List<NoteTimeLineUnit> TimeLine
+	{
+		get
+		{
+			return List;
+		}
+	}
 
 	// TODO: AddNote() operations muse be sequenced now. Increase its robustness!
 	public void AddNote(NoteTimeLineUnit unit)
@@ -33,7 +40,6 @@ public class NoteTimeLine
 		
 		foreach (var chunk in midiFile.ChunkList)
 		{
-
 			var currentTime = 0.0f;
 			foreach (var midiEvent in chunk.EventList)
 			{

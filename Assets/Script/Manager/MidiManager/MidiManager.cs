@@ -132,68 +132,79 @@ public class MidiManager
 
 	private bool GetEvent(MidiChunk currentChunk)
 	{
-		var deltaTime = GetVariableLengthValue();
+		long deltaTime;
+		try
+		{
+			deltaTime = GetVariableLengthValue();
+		}
+		catch
+		{
+			return true;
+		}
 		MidiEvent newEvent = null;
-
+	
 		long firstByte = GetValue(1);
 
 		switch (firstByte & 0xF0)
 		{
-		case 0x90:
-			newEvent = new NoteOnMidiEvent()
-			{
-				TunnelNumber = firstByte & 0x0F,
-				Note = GetValue(1),
-				Speed = GetValue(1)
-			};
-			break;
-		case 0x80:
-			newEvent = new NoteOffMidiEvent()
-			{
-				TunnelNumber = firstByte & 0x0F,
-				Note = GetValue(1),
-				Speed = GetValue(1)
-			};
-			break;
-		case 0xC0:
-			newEvent = new ChangeTimbreMidiEvent()
-			{
-				TunnelNumber = firstByte & 0x0F,
-				Program = GetValue(1)
-			};
-			break;
-		case 0xB0:
-			newEvent = new ChangeVolumeMidiEvent()
-			{
-				TunnelNumber = firstByte & 0x0F,
-				Type = GetValue(1),
-				Size = GetValue(1)
-			};
-			break;
-		case 0xF0:
-			if (firstByte != 0xFF)
+			case 0x90:
+				newEvent = new NoteOnMidiEvent()
+				{
+					TunnelNumber = firstByte & 0x0F,
+					Note = GetValue(1),
+					Speed = GetValue(1)
+				};
 				break;
-			switch (GetValue(1))
-			{
-			// End of Chunk
-			case 0x2F:
-				// Debug.Log("End");
-				CurrentPointer ++;
-				return true;
-			// Us Per quater note
-			case 0x51:
-				CurrentPointer ++;
-				CurrentFile.UsPerQuaterNote = GetValue(3);
-				Debug.Log("UsPerPai: " + CurrentFile.UsPerQuaterNote);
+			case 0x80:
+				newEvent = new NoteOffMidiEvent()
+				{
+					TunnelNumber = firstByte & 0x0F,
+					Note = GetValue(1),
+					Speed = GetValue(1)
+				};
 				break;
-			// default (other control event)
-			default:
-				// Debug.Log("Control");
-				var length = GetValue(1);
-				CurrentPointer += length;
+			case 0xC0:
+				newEvent = new ChangeTimbreMidiEvent()
+				{
+					TunnelNumber = firstByte & 0x0F,
+					Program = GetValue(1)
+				};
 				break;
-			}
-			break;
+			case 0xB0:
+				newEvent = new ChangeVolumeMidiEvent()
+				{
+					TunnelNumber = firstByte & 0x0F,
+					Type = GetValue(1),
+					Size = GetValue(1)
+				};
+				break;
+			case 0xF0:
+				if (firstByte != 0xFF)
+					break;
+				switch (GetValue(1))
+				{
+					// End of Chunk
+					case 0x2F:
+						// Debug.Log("End");
+						CurrentPointer ++;
+						return true;
+					// Us Per quater note
+					case 0x51:
+						CurrentPointer ++;
+						CurrentFile.UsPerQuaterNote = GetValue(3);
+						Debug.Log("UsPerPai: " + CurrentFile.UsPerQuaterNote);
+						break;
+					case 0x58:
+						GetValue(5);
+						break;
+					// default (other control event)
+					default:
+						// Debug.Log("Control");
+						var length = GetValue(1);
+						CurrentPointer += length;
+						break;
+				}
+				break;
 		}
 		if (newEvent != null)
 		{

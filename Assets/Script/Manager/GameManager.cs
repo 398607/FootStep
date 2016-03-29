@@ -6,18 +6,20 @@ public class GameManager : MonoBehaviour
 {
 	// inspector
 	public Timer TimerPrefab;
-	public NoteCreator NoteCreatorPrefab;
+	public Note NotePrefab;
 
-	// [HideInInspector]
+	[HideInInspector]
 	public Timer Timer;
 	public static GameManager Instance = null;
 
 	private readonly ScoreListener _scoreListener = null;
 	private NoteCreator _noteCreator = null;
+	private PlotManager _plotManager = null;
 	private MusicPlayer _musicPlayer = null;
 
 	// GUI
 	private Button startButton = null;
+	private bool startButtonActive = true;
 
 	public static float GetTime()
 	{
@@ -53,7 +55,10 @@ public class GameManager : MonoBehaviour
 		Timer.StartTimer();
 
 		// note creator
-		_noteCreator = Instantiate(NoteCreatorPrefab);
+		_noteCreator = new NoteCreator();
+
+		// plot manager
+		_plotManager = new PlotManager();
 
 		// score listener
 		_scoreListener.AddScoreBoard(GameObject.FindObjectOfType<ScoreBoard>());
@@ -64,7 +69,7 @@ public class GameManager : MonoBehaviour
 		// play/ pause button
 		startButton = GameObject.Find("StartButton").GetComponent<Button>();
 		startButton.GetComponentInChildren<Text>().text = "play";
-		startButton.onClick.AddListener(PlayOrPause);
+		startButton.onClick.AddListener(OnStartButton);
 
 		// midi parser
 		var midiManager = new MidiManager();
@@ -77,27 +82,36 @@ public class GameManager : MonoBehaviour
 
 	}
 
-	// start game (invoked by startButton)
-	void PlayOrPause()
+	private void OnStartButton()
 	{
-		Timer.Trigger();
-		_musicPlayer.PlayPause();
-		if (Timer.Functioning)
-		{
-			startButton.GetComponentInChildren<Text>().text = "pause";
-		}
-		else
-		{
-			startButton.GetComponentInChildren<Text>().text = "play";
-		}
+		if (startButtonActive)
+			Trigger();
+	}
+
+	public static void TriggerStartButtonActive()
+	{
+		Instance.startButtonActive = !Instance.startButtonActive;
+	}
+
+	// start game/ pause game
+	public static void Trigger()
+	{
+		Instance.Timer.Trigger();
+		Instance._musicPlayer.PlayPause();
+		Instance.startButton.GetComponentInChildren<Text>().text = Playing() ? "pause" : "play";
 	}
 
 	void Update()
 	{
+		// start music
 		if (GetTime() > 6f && !_musicPlayer.Functioning)
 		{
 			_musicPlayer.Functioning = true;
 			_musicPlayer.PlayPause();
 		}
+
+		// attached managers Update()
+		_noteCreator.Update();
+		_plotManager.Update();
 	}
 }

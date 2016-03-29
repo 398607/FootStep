@@ -52,11 +52,17 @@
     <Reference Include="UnityEngine">
       <HintPath>Library\UnityAssemblies\UnityEngine.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEngine.Advertisements">
+      <HintPath>Library\UnityAssemblies\UnityEngine.Advertisements.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine.UI">
       <HintPath>Library\UnityAssemblies\UnityEngine.UI.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.Networking">
       <HintPath>Library\UnityAssemblies\UnityEngine.Networking.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.Analytics">
+      <HintPath>Library\UnityAssemblies\UnityEngine.Analytics.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor">
       <HintPath>Library\UnityAssemblies\UnityEditor.dll</HintPath>
@@ -69,9 +75,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Script\Listener\ListenEvent.cs" />
-    <Compile Include="Assets\Script\Listener\ListenEventSender.cs" />
-    <Compile Include="Assets\Script\Listener\Listener.cs" />
+    <Compile Include="Assets\Script\Base\Listener\ListenEvent.cs" />
+    <Compile Include="Assets\Script\Base\Listener\ListenEventSender.cs" />
+    <Compile Include="Assets\Script\Base\Listener\Listener.cs" />
+    <Compile Include="Assets\Script\Base\TimeLine\TimeLine.cs" />
     <Compile Include="Assets\Script\Manager\GameManager.cs" />
     <Compile Include="Assets\Script\Manager\MidiManager\MidiChunk.cs" />
     <Compile Include="Assets\Script\Manager\MidiManager\MidiEvent.cs" />
@@ -80,6 +87,7 @@
     <Compile Include="Assets\Script\Manager\MusicPlayer.cs" />
     <Compile Include="Assets\Script\Manager\NoteCreator\NoteCreator.cs" />
     <Compile Include="Assets\Script\Manager\NoteCreator\NoteTimeLine.cs" />
+    <Compile Include="Assets\Script\Manager\PlotManager.cs" />
     <Compile Include="Assets\Script\Manager\ScoreListener\ScoreBoard.cs" />
     <Compile Include="Assets\Script\Manager\ScoreListener\ScoreEvent.cs" />
     <Compile Include="Assets\Script\Manager\ScoreListener\ScoreListener.cs" />

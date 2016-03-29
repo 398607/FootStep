@@ -31,7 +31,7 @@ public class ActivateNoteState : NoteState
 		}
 		else if (percent > -1f)
 		{
-			_noteRenderer.color = new Color(0f, 0f, 0f, percent + 1);
+			_noteRenderer.color = new Color(0f, 0f, 0f);
 		}
 		if (percent <= -1f)
 		{
