@@ -10,29 +10,29 @@ using System.Security.Cryptography.X509Certificates;
 public class MidiManager
 {
 
-	public MidiFile CurrentFile;
+	public MidiFileNai CurrentFileNai;
 	public byte[] CurrentByteArray;
 	public long CurrentPointer;
 
-	public MidiFile Parse()
+	public MidiFileNai Parse()
 	{
 		
 		CurrentByteArray = File.ReadAllBytes("test.mid");
 		CurrentPointer = 0;
-		CurrentFile = new MidiFile();
+		CurrentFileNai = new MidiFileNai();
 
 		// MThd header -> midi format
 		GetMThdHeader();
-		CurrentFile.LogInfo();
+		CurrentFileNai.LogInfo();
 
-		for (var i = 1; i <= CurrentFile.ChunkCount; i++)
+		for (var i = 1; i <= CurrentFileNai.ChunkCount; i++)
 		{
 			var chunk = GetMTrkChunk(i);
 			if (chunk != null)
 				chunk.LogInfo();
 		}
 
-		return CurrentFile;
+		return CurrentFileNai;
 	}
 
 	// get int value from _currentByteArray[CurrentPointer, CurrentPointer + length)
@@ -88,21 +88,21 @@ public class MidiManager
 		switch (GetValue(1))
 		{
 			case 0x00:
-				CurrentFile.Format = MidiFile.MidiFormat.Single;
+				CurrentFileNai.Format = MidiFileNai.MidiFormat.Single;
 				break;
 			case 0x01:
-				CurrentFile.Format = MidiFile.MidiFormat.MutipleSync;
+				CurrentFileNai.Format = MidiFileNai.MidiFormat.MutipleSync;
 				break;
 			case 0x02:
-				CurrentFile.Format = MidiFile.MidiFormat.MutipleNotSync;
+				CurrentFileNai.Format = MidiFileNai.MidiFormat.MutipleNotSync;
 				break;
 		}
 
 		// chunk count
-		CurrentFile.ChunkCount = GetValue(2);
+		CurrentFileNai.ChunkCount = GetValue(2);
 
 		// PPQN
-		CurrentFile.PPQN = GetValue(2);
+		CurrentFileNai.PPQN = GetValue(2);
 		
 		return true;
 	}
@@ -121,7 +121,7 @@ public class MidiManager
 			Count = GetValue(4)
 		};
 		
-		CurrentFile.ChunkList.Add(chunk);
+		CurrentFileNai.ChunkList.Add(chunk);
 
 		while (!GetEvent(chunk))
 		{
@@ -141,14 +141,14 @@ public class MidiManager
 		{
 			return true;
 		}
-		MidiEvent newEvent = null;
+		MidiEventNai newEventNai = null;
 	
 		long firstByte = GetValue(1);
 
 		switch (firstByte & 0xF0)
 		{
 			case 0x90:
-				newEvent = new NoteOnMidiEvent()
+				newEventNai = new NoteOnMidiEventNai()
 				{
 					TunnelNumber = firstByte & 0x0F,
 					Note = GetValue(1),
@@ -156,7 +156,7 @@ public class MidiManager
 				};
 				break;
 			case 0x80:
-				newEvent = new NoteOffMidiEvent()
+				newEventNai = new NoteOffMidiEventNai()
 				{
 					TunnelNumber = firstByte & 0x0F,
 					Note = GetValue(1),
@@ -164,14 +164,14 @@ public class MidiManager
 				};
 				break;
 			case 0xC0:
-				newEvent = new ChangeTimbreMidiEvent()
+				newEventNai = new ChangeTimbreMidiEventNai()
 				{
 					TunnelNumber = firstByte & 0x0F,
 					Program = GetValue(1)
 				};
 				break;
 			case 0xB0:
-				newEvent = new ChangeVolumeMidiEvent()
+				newEventNai = new ChangeVolumeMidiEventNai()
 				{
 					TunnelNumber = firstByte & 0x0F,
 					Type = GetValue(1),
@@ -191,8 +191,8 @@ public class MidiManager
 					// Us Per quater note
 					case 0x51:
 						CurrentPointer ++;
-						CurrentFile.UsPerQuaterNote = GetValue(3);
-						Debug.Log("UsPerPai: " + CurrentFile.UsPerQuaterNote);
+						CurrentFileNai.UsPerQuaterNote = GetValue(3);
+						Debug.Log("UsPerPai: " + CurrentFileNai.UsPerQuaterNote);
 						break;
 					case 0x58:
 						GetValue(5);
@@ -206,11 +206,11 @@ public class MidiManager
 				}
 				break;
 		}
-		if (newEvent != null)
+		if (newEventNai != null)
 		{
-			newEvent.DeltaTime = deltaTime;
+			newEventNai.DeltaTime = deltaTime;
 			// Debug.Log(newEvent.Info());
-			currentChunk.EventList.Add(newEvent);
+			currentChunk.EventList.Add(newEventNai);
 		}
 		return false;
 	}

@@ -7,7 +7,7 @@ public class MidiChunk
 	public int Number;
 	public long Count;
 
-	public List<MidiEvent> EventList = new List<MidiEvent>();
+	public List<MidiEventNai> EventList = new List<MidiEventNai>();
 
 	public void LogInfo()
 	{

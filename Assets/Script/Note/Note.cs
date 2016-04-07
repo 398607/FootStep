@@ -16,7 +16,7 @@ public class Note : MonoBehaviour
 	public Animator Animator;
 
 	// when get related invoked
-	private void Invoked()
+	public void Invoked()
 	{
 		if (!GameManager.Playing())
 			return;
@@ -35,7 +35,7 @@ public class Note : MonoBehaviour
 	// called by unity itself
 	private void OnMouseDown()
 	{
-		Invoked();
+		// Invoked();
 	}
 
 	// Use this for initialization

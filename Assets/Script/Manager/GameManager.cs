@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+using NAudio.Midi;
 using UnityEngine.UI;
+using NAudio.Midi;
 
 public class GameManager : MonoBehaviour
 {
@@ -20,6 +23,8 @@ public class GameManager : MonoBehaviour
 	// GUI
 	private Button startButton = null;
 	private bool startButtonActive = true;
+
+	public List<Note> Notes = new List<Note>(); 
 
 	public static float GetTime()
 	{
@@ -72,12 +77,14 @@ public class GameManager : MonoBehaviour
 		startButton.onClick.AddListener(OnStartButton);
 
 		// midi parser
-		var midiManager = new MidiManager();
-		var midiFile = midiManager.Parse();
+		// var midiManager = new MidiManager();
+		// var midiFile = midiManager.Parse();
 
 		// load test midi file
-		_noteCreator.LoadMidiFile(midiFile, 6f);
-
+		var file = new MidiFile("futurest!.mid");
+		_noteCreator.LoadMidiFile(file, 6f);
+		// Debug.Log(file.ToString());
+		
 		Debug.Log("GameManger Start() done");
 
 	}

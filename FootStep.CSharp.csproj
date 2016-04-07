@@ -52,17 +52,11 @@
     <Reference Include="UnityEngine">
       <HintPath>Library\UnityAssemblies\UnityEngine.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEngine.Advertisements">
-      <HintPath>Library\UnityAssemblies\UnityEngine.Advertisements.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEngine.UI">
       <HintPath>Library\UnityAssemblies\UnityEngine.UI.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.Networking">
       <HintPath>Library\UnityAssemblies\UnityEngine.Networking.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.Analytics">
-      <HintPath>Library\UnityAssemblies\UnityEngine.Analytics.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor">
       <HintPath>Library\UnityAssemblies\UnityEditor.dll</HintPath>
@@ -80,6 +74,32 @@
     <Compile Include="Assets\Script\Base\Listener\Listener.cs" />
     <Compile Include="Assets\Script\Base\TimeLine\TimeLine.cs" />
     <Compile Include="Assets\Script\Manager\GameManager.cs" />
+    <Compile Include="Assets\Script\Manager\MidiManager\Midi\ChannelAfterTouchEvent.cs" />
+    <Compile Include="Assets\Script\Manager\MidiManager\Midi\ControlChangeEvent.cs" />
+    <Compile Include="Assets\Script\Manager\MidiManager\Midi\KeySignatureEvent.cs" />
+    <Compile Include="Assets\Script\Manager\MidiManager\Midi\MetaEvent.cs" />
+    <Compile Include="Assets\Script\Manager\MidiManager\Midi\MetaEventType.cs" />
+    <Compile Include="Assets\Script\Manager\MidiManager\Midi\MidiCommandCode.cs" />
+    <Compile Include="Assets\Script\Manager\MidiManager\Midi\MidiController.cs" />
+    <Compile Include="Assets\Script\Manager\MidiManager\Midi\MidiEvent.cs" />
+    <Compile Include="Assets\Script\Manager\MidiManager\Midi\MidiEventCollection.cs" />
+    <Compile Include="Assets\Script\Manager\MidiManager\Midi\MidiEventComparer.cs" />
+    <Compile Include="Assets\Script\Manager\MidiManager\Midi\MidiFile.cs" />
+    <Compile Include="Assets\Script\Manager\MidiManager\Midi\MidiInMessageEventArgs.cs" />
+    <Compile Include="Assets\Script\Manager\MidiManager\Midi\MidiMessage.cs" />
+    <Compile Include="Assets\Script\Manager\MidiManager\Midi\NoteEvent.cs" />
+    <Compile Include="Assets\Script\Manager\MidiManager\Midi\NoteOnEvent.cs" />
+    <Compile Include="Assets\Script\Manager\MidiManager\Midi\PatchChangeEvent.cs" />
+    <Compile Include="Assets\Script\Manager\MidiManager\Midi\PitchWheelChangeEvent.cs" />
+    <Compile Include="Assets\Script\Manager\MidiManager\Midi\SequencerSpecificEvent.cs" />
+    <Compile Include="Assets\Script\Manager\MidiManager\Midi\SmpteOffsetEvent.cs" />
+    <Compile Include="Assets\Script\Manager\MidiManager\Midi\SysexEvent.cs" />
+    <Compile Include="Assets\Script\Manager\MidiManager\Midi\TempoEvent.cs" />
+    <Compile Include="Assets\Script\Manager\MidiManager\Midi\TextEvent.cs" />
+    <Compile Include="Assets\Script\Manager\MidiManager\Midi\TimeSignatureEvent.cs" />
+    <Compile Include="Assets\Script\Manager\MidiManager\Midi\TrackSequenceNumberEvent.cs" />
+    <Compile Include="Assets\Script\Manager\MidiManager\Midi\Utils\ByteEncoding.cs" />
+    <Compile Include="Assets\Script\Manager\MidiManager\Midi\Utils\MergeSort.cs" />
     <Compile Include="Assets\Script\Manager\MidiManager\MidiChunk.cs" />
     <Compile Include="Assets\Script\Manager\MidiManager\MidiEvent.cs" />
     <Compile Include="Assets\Script\Manager\MidiManager\MidiFile.cs" />
@@ -101,6 +121,7 @@
     <Compile Include="Assets\Script\Note\NoteState\InvokedNoteState.cs" />
     <Compile Include="Assets\Script\Note\NoteState\MissNoteState.cs" />
     <Compile Include="Assets\Script\Note\NoteState\NoteState.cs" />
+    <Compile Include="Assets\Script\NoteInvoker\NoteInvoker.cs" />
     <Compile Include="Assets\Script\Timer\Timer.cs" />
     <Compile Include="Assets\Script\Timer\TimerScreen.cs" />
   </ItemGroup>

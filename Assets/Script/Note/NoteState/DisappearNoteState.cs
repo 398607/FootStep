@@ -5,7 +5,7 @@ public class DisappearNoteState : NoteState
 {
 	public static float Velocity = 20f;
 	public static float BreakTime = 0.5f;
-	public static float FlyTime = 5f;
+	public static float FlyTime = 0.02f;
 
 	private readonly float _enterTime = 0f;
 	private float _angle = 0f;
@@ -23,6 +23,8 @@ public class DisappearNoteState : NoteState
 
 		// ramdomized fly-away angle (towards "up")
 		_angle = UnityEngine.Random.Range(0, Mathf.PI);
+
+		GameManager.Instance.Notes.Remove(note);
 	}
 
 	private float KeepTime()
@@ -39,7 +41,10 @@ public class DisappearNoteState : NoteState
 
 		// fly away
 		if (_flyAway)
-			note.gameObject.transform.Translate(new Vector3(Mathf.Cos(_angle) * Velocity * Time.deltaTime, Mathf.Sin(_angle) * Velocity * Time.deltaTime, 0));
+		{
+			note.gameObject.transform.Translate(new Vector3(Mathf.Cos(_angle)*Velocity*Time.deltaTime,
+				Mathf.Sin(_angle)*Velocity*Time.deltaTime, 0));
+		}
 		return null;
 	}
 

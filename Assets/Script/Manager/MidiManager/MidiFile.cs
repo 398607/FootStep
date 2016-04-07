@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class MidiFile
+public class MidiFileNai
 {
 	public enum MidiFormat
 	{

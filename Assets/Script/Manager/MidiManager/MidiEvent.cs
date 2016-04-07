@@ -2,7 +2,7 @@
 using System.Collections;
 
 
-public class MidiEvent
+public class MidiEventNai
 {
 	public long DeltaTime;
 
@@ -12,7 +12,7 @@ public class MidiEvent
 	}
 }
 
-public class WithTunnelMidiEvent : MidiEvent
+public class WithTunnelMidiEventNai : MidiEventNai
 {
 	public long TunnelNumber;
 
@@ -22,7 +22,7 @@ public class WithTunnelMidiEvent : MidiEvent
 	}
 }
 
-public class NoteOnMidiEvent : WithTunnelMidiEvent
+public class NoteOnMidiEventNai : WithTunnelMidiEventNai
 {
 	public long Note;
 	public long Speed;
@@ -33,7 +33,7 @@ public class NoteOnMidiEvent : WithTunnelMidiEvent
 	}
 }
 
-public class NoteOffMidiEvent : WithTunnelMidiEvent
+public class NoteOffMidiEventNai : WithTunnelMidiEventNai
 {
 	public long Note;
 	public long Speed;
@@ -44,7 +44,7 @@ public class NoteOffMidiEvent : WithTunnelMidiEvent
 	}
 }
 
-public class ChangeTimbreMidiEvent : WithTunnelMidiEvent
+public class ChangeTimbreMidiEventNai : WithTunnelMidiEventNai
 {
 	public long Program;
 
@@ -54,7 +54,7 @@ public class ChangeTimbreMidiEvent : WithTunnelMidiEvent
 	}
 }
 
-public class ChangeVolumeMidiEvent : WithTunnelMidiEvent
+public class ChangeVolumeMidiEventNai : WithTunnelMidiEventNai
 {
 	public long Type; // 0x07 or 0x39
 	public long Size;
