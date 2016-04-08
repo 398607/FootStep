@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
 	// inspector
 	public Timer TimerPrefab;
 	public Note NotePrefab;
+	
 
 	[HideInInspector]
 	public Timer Timer;
@@ -20,11 +21,22 @@ public class GameManager : MonoBehaviour
 	private PlotManager _plotManager = null;
 	private MusicPlayer _musicPlayer = null;
 
+
+
+
 	// GUI
 	private Button startButton = null;
 	private bool startButtonActive = true;
+	// plotdisplay
+	private PlotDisplay _plotDisplay;
 
-	public List<Note> Notes = new List<Note>(); 
+	public List<Note> Notes = new List<Note>();
+
+	public static PlotDisplay PlotDisplay
+	{
+		get { return Instance._plotDisplay; }
+		set { }
+	}
 
 	public static float GetTime()
 	{
@@ -76,6 +88,12 @@ public class GameManager : MonoBehaviour
 		startButton.GetComponentInChildren<Text>().text = "play";
 		startButton.onClick.AddListener(OnStartButton);
 
+		// plotDisplay
+		_plotDisplay = GameObject.FindObjectOfType<PlotDisplay>();
+		_plotDisplay.Init();
+		_plotDisplay.Hide();
+		_plotDisplay.gameObject.SetActive(false);
+
 		// midi parser
 		// var midiManager = new MidiManager();
 		// var midiFile = midiManager.Parse();
@@ -84,6 +102,9 @@ public class GameManager : MonoBehaviour
 		var file = new MidiFile("futurest!.mid");
 		_noteCreator.LoadMidiFile(file, 6f);
 		// Debug.Log(file.ToString());
+
+		// Line
+		GameObject.Find("Line").transform.position = new Vector3(0, -4, 0);
 		
 		Debug.Log("GameManger Start() done");
 
