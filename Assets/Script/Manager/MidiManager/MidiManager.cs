@@ -16,8 +16,8 @@ public class MidiManager
 
 	public MidiFileNai Parse()
 	{
-		
-		CurrentByteArray = File.ReadAllBytes("test.mid");
+		// TODO: solve this!
+		// CurrentByteArray = File.ReadAllBytes("test.mid");
 		CurrentPointer = 0;
 		CurrentFileNai = new MidiFileNai();
 

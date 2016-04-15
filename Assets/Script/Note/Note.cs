@@ -35,7 +35,7 @@ public class Note : MonoBehaviour
 	// called by unity itself
 	private void OnMouseDown()
 	{
-		// Invoked();
+		Invoked();
 	}
 
 	// Use this for initialization
