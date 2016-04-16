@@ -79,6 +79,7 @@ public class GameManager : MonoBehaviour
 
 		// music player
 		_musicPlayer = GameObject.FindObjectOfType<MusicPlayer>();
+		_musicPlayer.LoadMusic("futurest!");
 
 		// play/ pause button
 		startButton = GameObject.Find("StartButton").GetComponent<Button>();
@@ -107,13 +108,11 @@ public class GameManager : MonoBehaviour
 
 	public static void LoadMidiFile(string midiname)
 	{
-		Debug.Log(midiname);
 		var resource = Resources.Load("Midi/" + midiname) as TextAsset;
 		if (resource == null)
 		{
 			Debug.Log("Midi File (*.bytes) cannot be read");
 		}
-		Debug.Log(string.Format("{0} {1} {2} {3}", resource.bytes[0], resource.bytes[1], resource.bytes[2], resource.bytes[3]));
 		var file = new MidiFile(resource.bytes);
 		Instance._noteCreator.LoadMidiFile(file, Instance.DelayBeforePlayMusic);
 	}
@@ -139,8 +138,8 @@ public class GameManager : MonoBehaviour
 
 	void Update()
 	{
-		// start music
-		if (GetTime() > 6f && !_musicPlayer.Functioning)
+		// start music when asked
+		if (GetTime() > DelayBeforePlayMusic && !_musicPlayer.Functioning)
 		{
 			_musicPlayer.Functioning = true;
 			_musicPlayer.PlayPause();

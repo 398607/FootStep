@@ -4,7 +4,7 @@ using System.Collections;
 public class MusicPlayer : MonoBehaviour
 {
 
-	public AudioSource music;
+	private AudioSource music = null;
 
 	public bool Functioning = false;
 
@@ -30,9 +30,14 @@ public class MusicPlayer : MonoBehaviour
 		// PlayPause();
 		music.Stop();
 	}
-	
-	// Update is called once per frame
-	void Update () {
-	
+
+	// the name of the audiosource prefab should be same as the name of the music.
+	public void LoadMusic(string musicName)
+	{
+		music = Resources.Load<AudioSource>("Prefab/Storage/" + musicName);
+		if (music == null)
+		{
+			Debug.Log(string.Format("AudioSource {0} cannot be read", musicName));
+		}
 	}
 }
