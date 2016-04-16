@@ -3,6 +3,7 @@ using System.IO;
 using System.Text;
 using System.Collections.Generic;
 using NAudio.Utils;
+using UnityEngine;
 
 namespace NAudio.Midi 
 {
@@ -21,8 +22,8 @@ namespace NAudio.Midi
         /// Opens a MIDI file for reading
         /// </summary>
         /// <param name="filename">Name of MIDI file</param>
-        public MidiFile(string filename)
-            : this(filename,true)
+        public MidiFile(byte[] bytes)
+            : this(bytes,true)
         {
         }
 
@@ -39,11 +40,11 @@ namespace NAudio.Midi
         /// </summary>
         /// <param name="filename">Name of MIDI file</param>
         /// <param name="strictChecking">If true will error on non-paired note events</param>
-        public MidiFile(string filename, bool strictChecking)
+        public MidiFile(byte[] bytes, bool strictChecking)
         {
             this.strictChecking = strictChecking;
             
-            var br = new BinaryReader(File.OpenRead(filename));
+            var br = new BinaryReader(new MemoryStream(bytes));
             using(br) 
             {
                 string chunkHeader = Encoding.UTF8.GetString(br.ReadBytes(4));

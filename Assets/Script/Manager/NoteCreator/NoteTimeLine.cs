@@ -94,6 +94,8 @@ public class NoteTimeLine : TimeLine<NoteTimeLineUnit>
 
 				var noteOnEvent = midiEvent as NoteOnEvent;
 
+				// Debug.Log(thisEventRealTime);
+
 				AddNote(new NoteTimeLineUnit(thisEventRealTime + delay, (noteOnEvent.NoteNumber % 5) - 2));
 			}
 		}

@@ -5,11 +5,16 @@ using NAudio.Midi;
 public class NoteCreator
 {
 	// in inspector
-	public Note NotePrefab = GameManager.Instance.NotePrefab;
+	public Note NotePrefab = null;
 
 	private readonly NoteTimeLine _timeLine = new NoteTimeLine();
 
 	public static float TimeBeforeCreate = 9.0f / DroppingNoteState.Velocity;
+
+	public NoteCreator()
+	{
+		NotePrefab = Resources.Load<Note>("Prefab/Usage/Note");
+	}
 
 	private Note NewNote(int number, NoteTimeLineUnit unit)
 	{

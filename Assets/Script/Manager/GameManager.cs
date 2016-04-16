@@ -4,13 +4,13 @@ using System.Collections.Generic;
 using NAudio.Midi;
 using UnityEngine.UI;
 using NAudio.Midi;
+using UnityEditor;
 
 public class GameManager : MonoBehaviour
 {
-	// inspector
-	public Timer TimerPrefab;
-	public Note NotePrefab;
-	
+	// constant
+	// when Timer->2.0s, the first Note appears at top of screen
+	public float DelayBeforePlayMusic = NoteCreator.TimeBeforeCreate + 2f;
 
 	[HideInInspector]
 	public Timer Timer;
@@ -20,9 +20,6 @@ public class GameManager : MonoBehaviour
 	private NoteCreator _noteCreator = null;
 	private PlotManager _plotManager = null;
 	private MusicPlayer _musicPlayer = null;
-
-
-
 
 	// GUI
 	private Button startButton = null;
@@ -68,7 +65,7 @@ public class GameManager : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
-		Timer = Instantiate(TimerPrefab);
+		Timer = Instantiate(Resources.Load<Timer>("Prefab/Usage/Timer"));
 		Timer.StartTimer();
 
 		// note creator
@@ -98,16 +95,27 @@ public class GameManager : MonoBehaviour
 		// var midiManager = new MidiManager();
 		// var midiFile = midiManager.Parse();
 
-		// load test midi file
-		var file = new MidiFile("futurest!.mid");
-		_noteCreator.LoadMidiFile(file, 6f);
+		// load test midi file from Resource!
+		LoadMidiFile("futurest!");
 		// Debug.Log(file.ToString());
 
 		// Line
 		GameObject.Find("Line").transform.position = new Vector3(0, -4, 0);
 		
 		Debug.Log("GameManger Start() done");
+	}
 
+	public static void LoadMidiFile(string midiname)
+	{
+		Debug.Log(midiname);
+		var resource = Resources.Load("Midi/" + midiname) as TextAsset;
+		if (resource == null)
+		{
+			Debug.Log("Midi File (*.bytes) cannot be read");
+		}
+		Debug.Log(string.Format("{0} {1} {2} {3}", resource.bytes[0], resource.bytes[1], resource.bytes[2], resource.bytes[3]));
+		var file = new MidiFile(resource.bytes);
+		Instance._noteCreator.LoadMidiFile(file, Instance.DelayBeforePlayMusic);
 	}
 
 	private void OnStartButton()
