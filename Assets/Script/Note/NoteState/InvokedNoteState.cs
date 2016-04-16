@@ -19,6 +19,6 @@ public class InvokedNoteState : NoteState
 
 	public override NoteState StateUpdate(Note note)
 	{
-		return new DisappearNoteState(GameManager.GetTime(), true);
+		return new DisappearNoteState(GameManager.GetTime());
 	}
 }

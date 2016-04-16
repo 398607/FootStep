@@ -37,7 +37,7 @@ public class PlotUnit
 		// give back power
 		GameManager.TriggerStartButtonActive();
 
-		Debug.Log("PlotUnit.Die()");
+		// Debug.Log("PlotUnit.Die()");
 		GameManager.PlotDisplay.gameObject.SetActive(false);
 		GameManager.PlotDisplay.Hide();
 	}

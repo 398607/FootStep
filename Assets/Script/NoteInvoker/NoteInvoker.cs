@@ -8,7 +8,7 @@ public class NoteInvoker : MonoBehaviour
 	
 	void OnMouseDown()
 	{
-		Debug.Log("NoteInvoker number: " + number);
+		// Debug.Log("NoteInvoker number: " + number);
 
 		List<Note> notes = GameManager.Instance.Notes;
 
@@ -17,7 +17,7 @@ public class NoteInvoker : MonoBehaviour
 
 		foreach (var note in notes)
 		{
-			if (note.Number == number && note.transform.position.y < min_y_value)
+			if (note.Number == number && note.transform.position.y < min_y_value && note.ExactTime + 2f > GameManager.GetTime())
 			{
 				min_y_value = note.transform.position.y;
 				invoked_note = note;

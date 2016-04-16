@@ -33,7 +33,7 @@ public class PlotDisplay : MonoBehaviour
 		_nextButton = GameObject.Find("NextButton").GetComponent<Button>();
 		_nextButton.onClick.AddListener(NextPlotString);
 
-		Debug.Log("PlotUnit Init() Done");
+		// Debug.Log("PlotUnit Init() Done");
 	}
 
 	public void Hide()
@@ -74,11 +74,11 @@ public class PlotDisplay : MonoBehaviour
 	// next PlotString
 	public void NextPlotString()
 	{
-		Debug.Log("Asked NextPlotString()");
+		// Debug.Log("Asked NextPlotString()");
 
 		if (_currentUnitNumber + 1 >= _plotUnit.List.Count)
 		{
-			Debug.Log("ask Die() from PlotDisplay");
+			// Debug.Log("ask Die() from PlotDisplay");
 			_plotUnit.Die();
 			return;
 		}
