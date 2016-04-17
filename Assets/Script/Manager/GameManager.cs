@@ -3,8 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using NAudio.Midi;
 using UnityEngine.UI;
-using NAudio.Midi;
-using UnityEditor;
 
 public class GameManager : MonoBehaviour
 {
@@ -12,8 +10,7 @@ public class GameManager : MonoBehaviour
 	// when Timer->2.0s, the first Note appears at top of screen
 	public float DelayBeforePlayMusic = NoteCreator.TimeBeforeCreate + 2f;
 
-	[HideInInspector]
-	public Timer Timer;
+	[HideInInspector] public Timer Timer;
 	public static GameManager Instance = null;
 
 	private readonly ScoreListener _scoreListener = null;
@@ -27,9 +24,9 @@ public class GameManager : MonoBehaviour
 	// plotdisplay
 	private PlotDisplay _plotDisplay;
 
-	public List<Note> Notes = new List<Note>();
+	public List<Note>[] Notes = {null, null, null, null, null};
 
-	public static PlotDisplay PlotDisplay
+public static PlotDisplay PlotDisplay
 	{
 		get { return Instance._plotDisplay; }
 		set { }
@@ -70,6 +67,12 @@ public class GameManager : MonoBehaviour
 
 		// note creator
 		_noteCreator = new NoteCreator();
+
+		// Notes
+		for (var i = 0; i <= 4; i++)
+		{
+			Notes[i] = new List<Note>();
+		}
 
 		// plot manager
 		_plotManager = new PlotManager();

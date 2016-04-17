@@ -15,7 +15,7 @@ public class DisappearNoteState : NoteState
 
 	public override void Enter(Note note)
 	{
-		GameManager.Instance.Notes.Remove(note);
+		GameManager.Instance.Notes[note.Number + 2].Remove(note);
 	}
 
 	private float KeepTime()

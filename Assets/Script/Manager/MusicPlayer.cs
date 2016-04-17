@@ -23,18 +23,10 @@ public class MusicPlayer : MonoBehaviour
 		}
 	}
 
-	// Use this for initialization
-	void Start ()
-	{
-		music = Instantiate(music);
-		// PlayPause();
-		music.Stop();
-	}
-
 	// the name of the audiosource prefab should be same as the name of the music.
 	public void LoadMusic(string musicName)
 	{
-		music = Resources.Load<AudioSource>("Prefab/Storage/" + musicName);
+		music = Instantiate(Resources.Load<AudioSource>("Prefab/Storage/" + musicName));
 		if (music == null)
 		{
 			Debug.Log(string.Format("AudioSource {0} cannot be read", musicName));
